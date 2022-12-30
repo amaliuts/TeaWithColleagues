@@ -6,8 +6,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace IOC.Controllers
 {
-    [Route("api")]
     [ApiController]
+    [Route("[controller]")]
     public class AvailabilityController : ControllerBase
     {
         private readonly IAvailabilityService _availabilityService;
@@ -16,27 +16,27 @@ namespace IOC.Controllers
             _availabilityService = availabilityService;
         }
 
-        [HttpGet("availabilities")]
+        [HttpGet("get-all-availabilities")]
         public async Task<List<Availability>> GetAllAvailabilities()
         {
             return  await _availabilityService.GetAllAvailabilities();
         }
 
         [HttpGet]
-        [Route("availabilities/{id}")]
+        [Route("get-availability-by-id")]
         public async Task<ActionResult<Availability>> GetAvailability(int id)
         {
             Availability availibility = await _availabilityService.GetAvailability(id);
             return availibility is not null ? availibility : NotFound(); 
         }
 
-        [HttpPost("availability")]
+        [HttpPost("add-availability")]
         public async Task<IActionResult> AddAvailability(CreateAvailabilityRequest createAvailability)
         {
             return new ObjectResult(await _availabilityService.AddAvailability(createAvailability)) { StatusCode = StatusCodes.Status201Created };
         }
 
-        [HttpDelete("availability/{id}")]
+        [HttpDelete("delete-availability")]
         public async Task<IActionResult> DeleteAvailability(int id)
         {
             bool result = await _availabilityService.DeleteAvailability(id);
