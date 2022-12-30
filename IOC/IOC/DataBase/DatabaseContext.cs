@@ -3,8 +3,12 @@ using Microsoft.EntityFrameworkCore;
 
 namespace IOC.DataBase
 {
-    public class DatabaseContext : DbContext
+    public partial class DatabaseContext : DbContext
     {
+        public virtual DbSet<Availability> Availabilities { get; set; }
+        public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<UserRefreshToken> UserRefreshTokens { get; set; }
+
         public DatabaseContext(DbContextOptions<DatabaseContext> options) : base(options)
         {
         }
@@ -45,10 +49,29 @@ namespace IOC.DataBase
                     .IsUnicode(false)
                     .HasColumnName("password");
             });
+
+            modelBuilder.Entity<UserRefreshToken>(entity =>
+            {
+                entity.HasKey(e => e.IDUserRefreshToken).HasName("PK_UserRefreshToken");
+
+                entity.ToTable("UserRefreshToken");
+
+                entity.Property(e => e.RefreshToken)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.RefreshTokenExpiryTime).HasColumnType("datetime");
+
+                entity.HasOne(d => d.User)
+                    .WithMany(p => p.UserRefreshTokens)
+                    .HasForeignKey(d => d.IDUser)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_UserRefreshToken_User_IDUser");
+            });
+
+            OnModelCreatingPartial(modelBuilder);
         }
 
-        public DbSet<Availability> Availabilities { get; set; }
-
-        public DbSet<User> Users { get; set; }
+        partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
     }
 }

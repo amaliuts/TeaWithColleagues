@@ -172,3 +172,4 @@ C:\Users\ami24\OneDrive\Desktop\Tea\TeaWithColleagues\IOC\IOC\obj\Debug\net6.0\r
 C:\Users\ami24\OneDrive\Desktop\Tea\TeaWithColleagues\IOC\IOC\obj\Debug\net6.0\IOC.pdb
 C:\Users\ami24\OneDrive\Desktop\Tea\TeaWithColleagues\IOC\IOC\obj\Debug\net6.0\IOC.genruntimeconfig.cache
 C:\Users\ami24\OneDrive\Desktop\Tea\TeaWithColleagues\IOC\IOC\obj\Debug\net6.0\ref\IOC.dll
+C:\Users\ami24\OneDrive\Desktop\Tea\TeaWithColleagues\IOC\IOC\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
