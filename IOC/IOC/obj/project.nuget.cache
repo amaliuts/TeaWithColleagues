@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "NcE6xwjVjRKM8ot+fDB6eqRFtJWWtrmGzn87PUcjV3eIOxQFHG89uJGBE3rc4U5XCPxo09vMc3fCCW9KGcpTIg==",
+  "dgSpecHash": "XfGnCm9O872M03XGXMSowqlQwZJoHW9HUkT5g8NWJPH5VyNLXPD1YsK5eiYQrWww7bKbbFz2HhZfA1ObeUArww==",
   "success": true,
-  "projectFilePath": "C:\\Daniela\\An3\\IOC\\BasicVersion\\IOC\\IOC\\IOC.csproj",
+  "projectFilePath": "C:\\Daniela\\An3\\IOC\\BasicVersion\\TeaWithColleagues\\IOC\\IOC\\IOC.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Customer\\.nuget\\packages\\azure.core\\1.24.0\\azure.core.1.24.0.nupkg.sha512",
     "C:\\Users\\Customer\\.nuget\\packages\\azure.identity\\1.6.0\\azure.identity.1.6.0.nupkg.sha512",

@@ -1,4 +1,6 @@
-﻿using IOC.DataBase;
+﻿using IOC.Constants;
+using IOC.CreateModels;
+using IOC.DataBase;
 using IOC.Models;
 using IOC.RequestModels;
 using IOC.Services.Interfaces;
@@ -11,10 +13,6 @@ namespace IOC.Services
     {
         private readonly DatabaseContext _context;
 
-        private static List<Availability> Availabilities = new List<Availability> {
-                new Availability{Id=1, StartDate = DateTime.Today, EndDate=DateTime.Today }
-            };
-
         public AvailabilityService(DatabaseContext dataBaseContext)
         {
             _context = dataBaseContext;
@@ -25,22 +23,33 @@ namespace IOC.Services
             return await _context.Availabilities.ToListAsync();
         }
 
-        public async Task<Availability> GetAvailability(int id)
+        public async Task<Availability> GetAvailabilityById(int id)
         {
             return await _context.Availabilities.FindAsync(id);
         }
+        public async Task<List<Availability>> GetAvailabilitiesByDateAndTime(DateTime dateTime)
+        {
+            return await _context.Availabilities.Where(a=>a.StartDate.Equals(dateTime)).ToListAsync();
+        }
 
-        public async Task<int> AddAvailability(CreateAvailabilityRequest createAvailabilityRequest)
+        public async Task<int> AddAvailability(CreateAvailability createAvailability)
         {
             Availability availability = new Availability
             {
-                StartDate = createAvailabilityRequest.StartDate,
-                EndDate = createAvailabilityRequest.EndDate
+                IdUser = createAvailability.IdUser,
+                StartDate = createAvailability.StartDate,
+                Type = AvailabilityType.Free
             };
 
+            if (createAvailability.Location != null)
+            {
+                availability.Location = createAvailability.Location;
+                availability.IdParticipant= createAvailability.IdParticipant;
+                availability.Type = AvailabilityType.TeaTime;
+            }
             _context.Add(availability);
             await _context.SaveChangesAsync();
-            return availability.Id;
+            return availability.IdAvailability;
         }
 
         public async Task<bool> DeleteAvailability(int id)
@@ -53,5 +62,20 @@ namespace IOC.Services
             await _context.SaveChangesAsync();
             return true;
         }
+    
+        public async Task<bool> RescheduleAvailability(int id, DateTime newDate)
+        {
+            Availability availability = await _context.Availabilities.FindAsync(id);
+            if (availability == null)
+                return false;
+
+            availability.StartDate= newDate;
+
+            _context.Availabilities.Update(availability);
+            await _context.SaveChangesAsync();
+            return true;
+        }
     }
 }
+
+
