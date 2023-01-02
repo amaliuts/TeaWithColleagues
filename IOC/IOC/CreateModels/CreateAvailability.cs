@@ -1,13 +1,15 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using IOC.Constants;
 
-namespace IOC.RequestModels
+namespace IOC.CreateModels
 {
-    public class CreateAvailabilityRequest
+    public class CreateAvailability
     {
+        public int IdUser { get; set; }
+
         public int? IdParticipant { get; set; }
+
         public string? Location { get; set; }
 
-        [Required]
         public DateTime StartDate { get; set; }
     }
 }

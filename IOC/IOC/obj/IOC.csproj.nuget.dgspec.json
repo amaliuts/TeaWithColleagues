@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Daniela\\An3\\IOC\\BasicVersion\\IOC\\IOC\\IOC.csproj": {}
+    "C:\\Daniela\\An3\\IOC\\BasicVersion\\TeaWithColleagues\\IOC\\IOC\\IOC.csproj": {}
   },
   "projects": {
-    "C:\\Daniela\\An3\\IOC\\BasicVersion\\IOC\\IOC\\IOC.csproj": {
+    "C:\\Daniela\\An3\\IOC\\BasicVersion\\TeaWithColleagues\\IOC\\IOC\\IOC.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Daniela\\An3\\IOC\\BasicVersion\\IOC\\IOC\\IOC.csproj",
+        "projectUniqueName": "C:\\Daniela\\An3\\IOC\\BasicVersion\\TeaWithColleagues\\IOC\\IOC\\IOC.csproj",
         "projectName": "IOC",
-        "projectPath": "C:\\Daniela\\An3\\IOC\\BasicVersion\\IOC\\IOC\\IOC.csproj",
+        "projectPath": "C:\\Daniela\\An3\\IOC\\BasicVersion\\TeaWithColleagues\\IOC\\IOC\\IOC.csproj",
         "packagesPath": "C:\\Users\\Customer\\.nuget\\packages\\",
-        "outputPath": "C:\\Daniela\\An3\\IOC\\BasicVersion\\IOC\\IOC\\obj\\",
+        "outputPath": "C:\\Daniela\\An3\\IOC\\BasicVersion\\TeaWithColleagues\\IOC\\IOC\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Customer\\AppData\\Roaming\\NuGet\\NuGet.Config",

@@ -1,4 +1,5 @@
-﻿using IOC.Models;
+﻿using IOC.CreateModels;
+using IOC.Models;
 using IOC.RequestModels;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,10 +9,14 @@ namespace IOC.Services.Interfaces
     {
         Task<List<Availability>> GetAllAvailabilities();
 
-        Task<Availability> GetAvailability(int id);
+        Task<Availability> GetAvailabilityById(int id);
+        Task<List<Availability>> GetAvailabilitiesByDateAndTime(DateTime dateTime);
 
-        Task<int> AddAvailability(CreateAvailabilityRequest createAvailabilityRequest);
+        Task<int> AddAvailability(CreateAvailability createAvailabilityRequest);
 
         Task<bool> DeleteAvailability(int id);
+
+        Task<bool> RescheduleAvailability(int id, DateTime newDate);
+
     }
 }
