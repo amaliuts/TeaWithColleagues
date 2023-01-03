@@ -12,7 +12,7 @@ namespace IOC.DataBase
         protected override void OnConfiguring( DbContextOptionsBuilder optionsBuilder)
         {
             base.OnConfiguring(optionsBuilder);
-            optionsBuilder.UseSqlServer("Server=.\\SQLExpress;Database=CeaiCuColegii;Trusted_Connection=true;TrustServerCertificate=true");
+            optionsBuilder.UseSqlServer("Data Source=localhost;;Database=CeaiCuColegii;Trusted_Connection=true;TrustServerCertificate=true");
 
         }
 
