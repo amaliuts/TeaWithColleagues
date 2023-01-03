@@ -38,6 +38,7 @@ namespace IOC.Services
         public async Task<User> EditUser(User user)
         {
             var result = await CheckIfUserExists(user.IDUser);
+            result.IDUser = user.IDUser;
             result.Name = user.Name;
             result.Surname = user.Surname;
             result.PhoneNumber = user.PhoneNumber;

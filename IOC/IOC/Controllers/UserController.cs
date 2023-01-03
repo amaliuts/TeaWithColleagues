@@ -21,7 +21,7 @@ namespace IOC.Controllers
         public async Task<ActionResult<UserInfoRequest>> GetUserByID(int id)
         {
             var users = await _userService.GetUserByID(id);
-            UserInfoRequest requestedUser = new UserInfoRequest(users.Name, users.Surname, users.PhoneNumber);
+            UserInfoRequest requestedUser = new UserInfoRequest(users.IDUser, users.Name, users.Surname, users.PhoneNumber);
             return (users == null) ? NotFound("User not found") : requestedUser;
         }
 
@@ -29,7 +29,7 @@ namespace IOC.Controllers
         public async Task<ActionResult<UserInfoRequest>> GetUserByName(string name)
         {
             var users = await _userService.GetUserByName(name);
-            UserInfoRequest req = new UserInfoRequest(users.Name, users.Surname, users.PhoneNumber);
+            UserInfoRequest req = new UserInfoRequest(users.IDUser, users.Name, users.Surname, users.PhoneNumber);
             return (users == null) ? NotFound("User not found") : req;
         }
 
@@ -41,21 +41,22 @@ namespace IOC.Controllers
 
             for (int i = 0; i < users.Count; i++)
             {
-                UserInfoRequest u = new UserInfoRequest(users[i].Name, users[i].Surname, users[i].PhoneNumber);
+                UserInfoRequest u = new UserInfoRequest(users[i].IDUser, users[i].Name, users[i].Surname, users[i].PhoneNumber);
                 requestedUsers.Add(u);
             }
             return (requestedUsers == null) ? NotFound("No users found") : requestedUsers;
         }
 
         [HttpPut("edit-user")]
-        public async Task<bool> EditUser([FromBody] UserInfoRequest user)
+        public async Task<bool> EditUser([FromBody] UserInfoRequest @user)
         {
             User u = new User();
-            u.Name = user.Name;
-            u.Surname = user.Surname;
-            u.PhoneNumber = user.PhoneNumber;
+            u.IDUser = (int)@user.IDUser;
+            u.Name = @user.Name;
+            u.Surname = @user.Surname;
+            u.PhoneNumber = @user.PhoneNumber;
 
-            if (u == null)
+            if (@user == null)
                 return false;
             else
             {
