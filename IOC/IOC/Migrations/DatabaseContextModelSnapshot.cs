@@ -6,8 +6,6 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-#nullable disable
-
 namespace IOC.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
@@ -24,22 +22,28 @@ namespace IOC.Migrations
 
             modelBuilder.Entity("IOC.Models.Availability", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("IdAvailability")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdAvailability"));
 
-                    b.Property<DateTime>("EndDate")
-                        .HasColumnType("datetime2");
+                    b.Property<int?>("IdParticipant")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IdUser")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Location")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("StartDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("UserIDUser")
+                    b.Property<int>("Type")
                         .HasColumnType("int");
 
-                    b.HasKey("Id");
+                    b.HasKey("IdAvailability");
 
                     b.HasIndex("UserIDUser");
 
