@@ -11,8 +11,8 @@ using System.ComponentModel.DataAnnotations;
 
 namespace IOC.Controllers
 {
-    [Route("api")]
     [ApiController]
+    [Route("[controller]")]
     public class AvailabilityController : ControllerBase
     {
         private readonly IAvailabilityService _availabilityService;
@@ -21,11 +21,12 @@ namespace IOC.Controllers
             _availabilityService = availabilityService;
         }
 
-        [HttpGet("availabilities")]
+        [HttpGet("get-all-availabilities")]
         public async Task<List<Availability>> GetAllAvailabilities()
         {
             return  await _availabilityService.GetAllAvailabilities();
         }
+
 
         [HttpGet("get-availabilities-by-id")]
         public async Task<ActionResult<Availability>> GetAvailability(int id)
@@ -33,6 +34,7 @@ namespace IOC.Controllers
             Availability availibility = await _availabilityService.GetAvailabilityById(id);
             return availibility is not null ? availibility : NotFound(); 
         }
+
 
         [HttpGet("get-availabilities-by-date-and-time")]
         public async Task<List<Availability>> GetAvailabilitiesByDateAndTime(DateTime dateTime)
@@ -53,7 +55,7 @@ namespace IOC.Controllers
             return new ObjectResult(await _availabilityService.AddAvailability(createAvaiability)) { StatusCode = StatusCodes.Status201Created };
         }
 
-        [HttpDelete("availability/{id}")]
+        [HttpDelete("delete-availability")]
         public async Task<IActionResult> DeleteAvailability(int id)
         {
             bool result = await _availabilityService.DeleteAvailability(id);
