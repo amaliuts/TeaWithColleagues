@@ -96,6 +96,7 @@ namespace IOC.Services
         {
             var result = await CheckIfAvailabilityExists(a.IdAvailability);
 
+                result.IdAvailability = a.IdAvailability;
                 result.IdUser = a.IdUser;
                 result.IdParticipant = a.IdParticipant;
                 result.Location = a.Location;

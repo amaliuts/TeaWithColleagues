@@ -55,13 +55,14 @@ namespace IOC.Controllers
         public async Task<bool> EditAvailability([FromBody] AvailabilityEditRequest availabilityDto)
         {
             Availability a = new Availability();
+            a.IdAvailability= availabilityDto.IdAvailability;
             a.IdUser = availabilityDto.IdUser;
             a.IdParticipant = availabilityDto.IdParticipant;
             a.Location = availabilityDto.Location;
             a.StartDate = availabilityDto.StartDate;
             
 
-            if (a == null)
+            if (@a == null)
                 return false;
             else
             {
