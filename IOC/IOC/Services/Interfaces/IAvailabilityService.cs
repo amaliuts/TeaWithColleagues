@@ -13,7 +13,7 @@ namespace IOC.Services.Interfaces
         Task<Availability> GetAvailabilityById(int id);
         Task<List<Availability>> GetAvailabilitiesByDateAndTime(DateTime dateTime);
 
-        Task<List<Availability>> GetAvailabilitiesByType(string type);
+        Task<List<Availability>> GetAvailabilitiesByType(int type);
         Task<int> AddAvailability(CreateAvailability createAvailabilityRequest);
 
         Task<int> AddTeaTime(CreateAvailability createAvailability);

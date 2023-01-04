@@ -47,7 +47,7 @@ namespace IOC.Controllers
         }
 
         [HttpGet("get-availabilities-by-type")]
-        public async Task<List<Availability>> GetAvailabilitiesByType(string type)
+        public async Task<List<Availability>> GetAvailabilitiesByType(int type)
         {
             return await _availabilityService.GetAvailabilitiesByType(type);
         }

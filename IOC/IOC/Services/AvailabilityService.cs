@@ -33,9 +33,10 @@ namespace IOC.Services
             return await _context.Availabilities.Where(a=>a.StartDate.Equals(dateTime)).ToListAsync();
         }
 
-        public async Task<List<Availability>> GetAvailabilitiesByType(string type)
+        public async Task<List<Availability>> GetAvailabilitiesByType(int type)
         {
-            return await _context.Availabilities.Where(a => a.Type.Equals(type)).ToListAsync();
+            
+            return await _context.Availabilities.Where(a=>(int)a.Type==type).ToListAsync();
 
         }
         public async Task<int> AddAvailability(CreateAvailability createAvailability)
@@ -91,28 +92,21 @@ namespace IOC.Services
             return await _context.Availabilities.Where(a => a.IdUser == idUser).ToListAsync();
 
         }
-        public async Task<Availability?> EditAvailability(Availability a)
+        public async Task<Availability> EditAvailability(Availability a)
         {
             var result = await CheckIfAvailabilityExists(a.IdAvailability);
 
-            if (result == null)
-                return null;
-            
-            result.IdUser = a.IdUser;
-            result.IdParticipant = a.IdParticipant;
-            result.Location = a.Location;
-            result.StartDate = a.StartDate;
-
-            
-            
-            
+                result.IdUser = a.IdUser;
+                result.IdParticipant = a.IdParticipant;
+                result.Location = a.Location;
+                result.StartDate = a.StartDate;
                 _context.Availabilities.Update(result);
                 await (_context.SaveChangesAsync());
                 return result;
             
         }
 
-        public async Task<Availability?> CheckIfAvailabilityExists(int? id)
+        public async Task<Availability> CheckIfAvailabilityExists(int? id)
         {
             var a = await _context.Availabilities.FirstOrDefaultAsync(a => a.IdAvailability == id);
             if (a == null)
