@@ -1,7 +1,9 @@
 using IOC.DataBase;
+using IOC.Filters;
 using IOC.Services;
 using IOC.Services.Interfaces;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 
@@ -29,7 +31,7 @@ builder.Services.AddAuthentication(opt =>
 
 // Add services to the container.
 
-builder.Services.AddControllers();
+builder.Services.AddControllers(options=>{ options.Filters.Add<HttpResponseExceptionFilter>(); });
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

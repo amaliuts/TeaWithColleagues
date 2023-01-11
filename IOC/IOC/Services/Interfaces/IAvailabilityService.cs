@@ -16,7 +16,7 @@ namespace IOC.Services.Interfaces
         Task<List<Availability>> GetAvailabilitiesByType(int type);
         Task<int> AddAvailability(CreateAvailability createAvailabilityRequest);
 
-        Task<int> AddTeaTime(CreateAvailability createAvailability);
+        Task<int> AddTeaTime(CreateTeaTime createAvailability);
         Task<bool> DeleteAvailability(int id);
 
         public Task<List<Availability>> GetAllAvailabilitiesByUser(int idUser);

@@ -37,7 +37,7 @@ namespace IOC.Controllers
         }
 
         [HttpGet("get-all-availabilities-by-user")]
-        public async Task<ActionResult<List<Availability>>> GetAllReviewsByUser(int idUser)
+        public async Task<ActionResult<List<Availability>>> GetAllAvailabilitiesByUser(int idUser)
         {
             return await _availabilityService.GetAllAvailabilitiesByUser(idUser);
         }
@@ -57,11 +57,12 @@ namespace IOC.Controllers
         {
             Availability a = new Availability();
             a.IdAvailability= availabilityDto.IdAvailability;
-            a.IdUser = availabilityDto.IdUser;
             a.IdParticipant = availabilityDto.IdParticipant;
             a.Location = availabilityDto.Location;
             a.StartDate = availabilityDto.StartDate;
-            
+            a.IdUser = availabilityDto.IdUser;
+
+
 
             if (@a == null)
                 return false;
@@ -78,22 +79,18 @@ namespace IOC.Controllers
             CreateAvailability createAvaiability = new()
             {
                 IdUser = userId,
-                IdParticipant = createAvailabilityRequest.IdParticipant,
-                Location=createAvailabilityRequest.Location,
                 StartDate=createAvailabilityRequest.StartDate
             };
             return new ObjectResult(await _availabilityService.AddAvailability(createAvaiability)) { StatusCode = StatusCodes.Status201Created };
         }
 
         [HttpPost("users/{userId}/TeaTime")]
-        public async Task<IActionResult> AddTeaTime([FromBody][Required] CreateAvailabilityRequest createAvailabilityRequest, [FromRoute][Required] int userId)
+        public async Task<IActionResult> AddTeaTime([FromBody][Required] CreateTeaTimeRequest createTeaTimeRequest, [FromRoute][Required] int userId)
         {
             CreateAvailability createAvaiability = new()
             {
                 IdUser = userId,
-                IdParticipant = createAvailabilityRequest.IdParticipant,
-                Location = createAvailabilityRequest.Location,
-                StartDate = createAvailabilityRequest.StartDate
+                StartDate = createTeaTimeRequest.StartDate
             };
             return new ObjectResult(await _availabilityService.AddAvailability(createAvaiability)) { StatusCode = StatusCodes.Status201Created };
         }

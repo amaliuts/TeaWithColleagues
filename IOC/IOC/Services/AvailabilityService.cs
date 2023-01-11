@@ -1,6 +1,7 @@
 ﻿using IOC.Constants;
 using IOC.CreateModels;
 using IOC.DataBase;
+using IOC.Exceptions;
 using IOC.Models;
 using IOC.RequestModels;
 using IOC.Services.Interfaces;
@@ -41,6 +42,13 @@ namespace IOC.Services
         }
         public async Task<int> AddAvailability(CreateAvailability createAvailability)
         {
+            User user = await _context.Users.FindAsync(createAvailability.IdUser);
+
+            if (user is null)
+            {
+                throw new UserNotFoundException();
+            }
+
             Availability availability = new Availability
             {
                 IdUser = createAvailability.IdUser,
@@ -48,18 +56,19 @@ namespace IOC.Services
                 Type = AvailabilityType.Free
             };
 
-            if (createAvailability.Location != "")
-            {
-                availability.Location = createAvailability.Location;
-                availability.IdParticipant= createAvailability.IdParticipant;
-                availability.Type = AvailabilityType.TeaTime;
-            }
             _context.Add(availability);
             await _context.SaveChangesAsync();
             return availability.IdAvailability;
         }
-        public async Task<int> AddTeaTime(CreateAvailability createAvailability)
+        public async Task<int> AddTeaTime(CreateTeaTime createAvailability)
         {
+            User user = await _context.Users.FindAsync(createAvailability.IdUser);
+
+            if (user is null)
+            {
+                throw new UserNotFoundException();
+            }
+
             Availability teaTime = new Availability
             {
                 IdUser = createAvailability.IdUser,
@@ -69,8 +78,6 @@ namespace IOC.Services
                 IdParticipant = createAvailability.IdParticipant
             };
         
-
-            
             _context.Add(teaTime);
             await _context.SaveChangesAsync();
             return teaTime.IdAvailability;
@@ -89,6 +96,7 @@ namespace IOC.Services
 
         public async Task<List<Availability>> GetAllAvailabilitiesByUser(int idUser)
         {
+
             return await _context.Availabilities.Where(a => a.IdUser == idUser).ToListAsync();
 
         }
